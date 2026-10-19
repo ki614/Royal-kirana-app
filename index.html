@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Royal Kirana</title>
+<style>
+body{font-family:Arial;background:#f5f5f5;margin:0}
+header{background:#16803c;color:white;padding:20px;text-align:center}
+main{padding:15px}
+.product{background:white;padding:15px;margin:12px 0;border-radius:12px}
+button{background:#16803c;color:white;border:0;padding:12px;border-radius:8px}
+#cart{background:#fff;padding:15px;border-radius:12px}
+</style>
+</head>
+<body>
+<header>
+<h1>Royal Kirana</h1>
+<p>आपकी अपनी ऑनलाइन किराना दुकान</p>
+</header>
+<main>
+<h2>हमारा सामान</h2>
+<div id="products"></div>
+<div id="cart">
+<h2>🛒 मेरा कार्ट</h2>
+<p id="items">अभी कार्ट खाली है</p>
+<h3 id="total">कुल: ₹0</h3>
+</div>
+</main>
+<script>
+const products=[
+{name:"आटा 5 किलो",price:220},
+{name:"चावल 1 किलो",price:70},
+{name:"चीनी 1 किलो",price:45},
+{name:"तेल 1 लीटर",price:150},
+{name:"दाल 1 किलो",price:120}
+];
+let cart=[];
+document.getElementById("products").innerHTML=
+products.map((p,i)=>`
+<div class="product">
+<h3>${p.name}</h3>
+<p>कीमत: ₹${p.price}</p>
+<button onclick="add(${i})">Add to Cart</button>
+</div>`).join("");
+function add(i){
+cart.push(products[i]);
+document.getElementById("items").innerHTML=
+cart.map(p=>p.name+" - ₹"+p.price).join("<br>");
+document.getElementById("total").textContent=
+"कुल: ₹"+cart.reduce((s,p)=>s+p.price,0);
+}
+</script>
+</body>
+</html>
